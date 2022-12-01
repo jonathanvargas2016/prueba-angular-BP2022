@@ -1,0 +1,36 @@
+<div class="container">
+    <div class="row">
+
+        <div class="col col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+
+            <h3>TODO LIST</h3>
+            <form action="" #formTODO="ngForm" (ngSubmit)="createTodo()">
+
+                <div class="d-flex">
+                    <div class="mb-3">
+                        <input type="email" class="form-control" id="todoInputId" placeholder="Título"
+                            [(ngModel)]="todoItem.description" name="todoItem" #itemTodo="ngModel" required>
+
+                        <small class="text-errors" *ngIf="itemTodo.touched && itemTodo.errors?.['required']">
+                            Es necesario agregar un TODO
+                        </small>
+                    </div>
+                    <button type="submit" class="btn btn-primary" [disabled]="formTODO.invalid">Agregar</button>
+                </div>
+            </form>
+
+        </div>
+
+        <div class="col col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12" *ngFor="let todoItem of todoList">
+            <app-todo-item [todoItem]="todoItem" (optionSucess)="getTodoList($event)"></app-todo-item>
+        </div>
+
+
+        <div class="col col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 bg-number-tasks">
+
+            {{tasksCompleted}} de {{todoList.length}} tarea(s) completadas
+
+        </div>
+
+    </div>
+</div>

@@ -1,0 +1,19 @@
+<div class="container">
+    <div class="row mb-4 bg-todo mt-4">
+        <div class="col col-xl-6 col-lg-6 col-md-6 col-sm-6 col-6">
+            <div class="form-check">
+                <input (change)="changeStatusTodo()" class="form-check-input" type="checkbox" value="" id="statusTodo"
+                    [(ngModel)]="todoItem.status">
+                <label class="form-check-label" for="statusTodo" [ngClass]="{'mark-text': todoItem.status}">
+                    {{ todoItem.description}}
+                </label>
+            </div>
+        </div>
+
+        <div class="col col-xl-6 col-lg-6 col-md-6 col-sm-6 col-6" style="text-align: end;">
+            <button class="btn btn-primary" (click)="deleteTodo()">Eliminar</button>
+
+        </div>
+
+    </div>
+</div>
