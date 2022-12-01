@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Itodo } from 'src/app/interfaces/itodo';
 import { TodolistService } from 'src/app/services/todolist.service';
+import { NgForm } from '@angular/forms';
 
 @Component({
   selector: 'app-todo',
@@ -20,6 +21,7 @@ export class TodoComponent implements OnInit {
   todoList: Itodo[] = [];
 
   tasksCompleted: number = 0;
+  errorCreateTask: boolean = false;
 
   constructor(private readonly todoListService: TodolistService) {
 
@@ -33,14 +35,19 @@ export class TodoComponent implements OnInit {
 
   }
 
-  createTodo() {
+  createTodo(forma: NgForm) {
     this.todoItem.finish_at = new Date().toISOString();
     this.todoListService.createTodo(this.todoItem).subscribe((res: any) => {
-      if (res) {
+      if (res.success) {
+        forma.reset()
         this.getTodoList(true)
+      } else {
+        this.errorCreateTask = false
       }
     }, error => {
       console.log(error.message)
+      this.errorCreateTask = false
+
     })
   }
 

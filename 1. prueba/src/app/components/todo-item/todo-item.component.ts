@@ -30,7 +30,7 @@ export class TodoItemComponent implements OnInit {
     if (this.todoItem.id) {
       this.todoListService.deleteTodo(this.todoItem.id).subscribe((res: any) => {
         console.log(res)
-        if (res) {
+        if (res.success) {
           this.optionSucess.emit(true)
         } else {
           this.optionSucess.emit(false)
@@ -52,9 +52,9 @@ export class TodoItemComponent implements OnInit {
       finish_at: new Date().toISOString(),
       id: this.todoItem.id
     }
-    this.todoListService.updateTodo(todoAux).subscribe((res) => {
+    this.todoListService.updateTodo(todoAux).subscribe((res: any) => {
       console.log(res)
-      if(res){
+      if(res.success){
         this.optionSucess.emit(true)
       }else {
         this.optionSucess.emit(false)
